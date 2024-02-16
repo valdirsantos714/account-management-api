@@ -37,7 +37,7 @@ Make sure you have the following tools installed on your machine:
 
 ## Installation
 - Clone the repository:
-- `$ git clone https://github.com/Fernanda-Kipper/live-crud-java-spring.git`
+- `$ git clone https://github.com/valdirsantos714/account-management-api`
 - Install dependencies with Maven
 - Configure the database properties in the `application.properties` and `application-dev.properties` file.
 - Run the application locally.
@@ -95,7 +95,7 @@ Certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
 
 ## Instalação
 - Clone o repositório:
-- `$ git clone https://github.com/Fernanda-Kipper/live-crud-java-spring.git`
+- `$ git clone https://github.com/valdirsantos714/account-management-api`
 - Instale dependências com Maven
 - Configure as propriedades do banco de dados no arquivo `application.properties` e no `application-dev.properties`.
 - Execute a aplicação localmente.
