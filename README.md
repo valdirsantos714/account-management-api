@@ -1,4 +1,4 @@
-# Account Management API With Spring Boot
+# Account Management API With Spring Boot 3
 
 ## About this repository
 This repository contains an efficient and easy-to-use Api for applications that need to manage users, that have bank accounts and that have a list of products.
@@ -44,9 +44,11 @@ Make sure you have the following tools installed on your machine:
 
 ## How to make Requests
 
-Place in Postman or any other collaboration platform for API development the link `http://localhost:8080/` with the following endpoints:
+Place in Postman or any other collaboration platform for API development the link `http://localhost:8080` with the following endpoints:
 
 - `GET /product` - To return a list of all users, account or products.
+
+- `GET /product/{id}` - To return a specific object.
 
 - `POST /product` - To save a new object to the database.
 
@@ -56,7 +58,7 @@ Place in Postman or any other collaboration platform for API development the lin
 
 ===============================================================
 
-# Api de Gerenciamento de Conta Com Spring Boot
+# Api de Gerenciamento de Conta Com Spring Boot 3
 
 ## Sobre este repositório
 Este repositório contém uma Api eficiente e fácil de usar para aplicações que necessitam gerenciar usuários, que possuam contas em bancos e que tenham uma lista de produtos.
@@ -102,9 +104,11 @@ Certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
 
 ## Como fazer Requisições
 
-Coloque no Postman ou em qualquer outra plataforma de colaboração para desenvolvimento de API o link `http://localhost:8080/` com os seguintes endpoints:
+Coloque no Postman ou em qualquer outra plataforma de colaboração para desenvolvimento de API o link `http://localhost:8080` com os seguintes endpoints:
 
 - `GET /product` - Para retornar uma lista de todos os usuários, conta ou produtos.
+
+- `GET /product/{id}` - Para retornar um objeto específico.
 
 - `POST /product` - Para salvar um novo objeto no banco de dados.
 
