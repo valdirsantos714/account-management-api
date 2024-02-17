@@ -1,8 +1,7 @@
 # Account Management API With Spring Boot 3
 
 ## About this repository
-This repository contains an efficient and easy-to-use Api for applications that need to manage users, that have bank accounts and that have a list of products.
-
+This repository contains an Api created with Java and Spring Boot 3 that is efficient and easy to use for applications that need to manage users, that have bank accounts and that have a list of products.
 ## Purposes of Use:
 
 - User, Account or product query: Users can easily enter, search, view and delete information about available products, accounts and users.
@@ -61,7 +60,7 @@ Place in Postman or any other collaboration platform for API development the lin
 # Api de Gerenciamento de Conta Com Spring Boot 3
 
 ## Sobre este repositório
-Este repositório contém uma Api eficiente e fácil de usar para aplicações que necessitam gerenciar usuários, que possuam contas em bancos e que tenham uma lista de produtos.
+Este repositório contém uma Api criada com Java e Spring Boot 3 eficiente e fácil de usar para aplicações que necessitam gerenciar usuários, que possuam contas em bancos e que tenham uma lista de produtos.
 
 ## Finalidades de Uso:
 
