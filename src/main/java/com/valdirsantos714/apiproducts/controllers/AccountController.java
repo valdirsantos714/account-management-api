@@ -2,6 +2,8 @@ package com.valdirsantos714.apiproducts.controllers;
 
 import com.valdirsantos714.apiproducts.dto.AccountDto;
 import com.valdirsantos714.apiproducts.entities.Account;
+import com.valdirsantos714.apiproducts.entities.Product;
+import com.valdirsantos714.apiproducts.entities.User;
 import com.valdirsantos714.apiproducts.services.AccountService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,14 @@ public class AccountController {
     public ResponseEntity<Account> findByIdAccount(@PathVariable Long id) {
         Account account = accountService.findById(id);
         return ResponseEntity.ok().body(account);
+    }
+
+    @GetMapping(value = "/{id}/products")
+    public ResponseEntity<List<Product>> findProducts (@PathVariable Long id) {
+        Account account = accountService.findById(id);
+
+        return ResponseEntity.ok().body(account.getProductList());
+
     }
 
     @PostMapping

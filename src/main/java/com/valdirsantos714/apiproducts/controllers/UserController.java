@@ -1,6 +1,8 @@
 package com.valdirsantos714.apiproducts.controllers;
 
 import com.valdirsantos714.apiproducts.dto.UserDto;
+import com.valdirsantos714.apiproducts.entities.Account;
+import com.valdirsantos714.apiproducts.entities.Product;
 import com.valdirsantos714.apiproducts.entities.User;
 import com.valdirsantos714.apiproducts.services.UserService;
 import jakarta.validation.Valid;
@@ -30,6 +32,14 @@ public class UserController {
         User user = userService.findById(id);
 
         return ResponseEntity.ok().body(user);
+
+    }
+
+    @GetMapping(value = "/{id}/accounts")
+    public ResponseEntity<List<Account>> findAccounts (@PathVariable Long id) {
+        User user = userService.findById(id);
+
+        return ResponseEntity.ok().body(user.getAccountList());
 
     }
 
