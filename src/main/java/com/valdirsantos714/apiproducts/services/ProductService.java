@@ -1,7 +1,9 @@
 package com.valdirsantos714.apiproducts.services;
 
 import com.valdirsantos714.apiproducts.dto.ProductDto;
+import com.valdirsantos714.apiproducts.entities.Account;
 import com.valdirsantos714.apiproducts.entities.Product;
+import com.valdirsantos714.apiproducts.repositories.AccountRepository;
 import com.valdirsantos714.apiproducts.repositories.ProductRepository;
 import com.valdirsantos714.apiproducts.services.exceptions.DataBaseException;
 import com.valdirsantos714.apiproducts.services.exceptions.ResourceNotFound;
@@ -21,17 +23,13 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    @Transactional
-    public Product save(ProductDto productDto) {
+    @Autowired
+    private AccountRepository accountRepository;
 
-        var product = new Product(productDto);
-
-        return productRepository.save(product);
-    }
-
-     /*
     @Transactional
     public Product save(Product product, Account account) {
+
+        //Tá dando erro no postman 
 
         double amount = product.getPrice() * product.getQuantity();
 
@@ -46,7 +44,7 @@ public class ProductService {
         } else {
             throw new DataBaseException("Insufficient balance error");
         }
-    }*/
+    }
 
 
     public List<Product> findAll() {

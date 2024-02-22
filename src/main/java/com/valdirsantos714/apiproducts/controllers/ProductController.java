@@ -1,6 +1,7 @@
 package com.valdirsantos714.apiproducts.controllers;
 
 import com.valdirsantos714.apiproducts.dto.ProductDto;
+import com.valdirsantos714.apiproducts.entities.Account;
 import com.valdirsantos714.apiproducts.entities.Product;
 import com.valdirsantos714.apiproducts.services.ProductService;
 import jakarta.validation.Valid;
@@ -42,10 +43,10 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Product> saveProduct(@RequestBody @Valid ProductDto productDto) {
-        /*Product product = new Product(productDto);
-        Account account = product.getAccount();*/
+        Product product = new Product(productDto);
+        Account account = product.getAccount();
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(productDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(product, account));
     }
 
     @DeleteMapping(value = "/{id}")
