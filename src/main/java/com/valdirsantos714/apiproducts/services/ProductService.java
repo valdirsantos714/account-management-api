@@ -29,6 +29,26 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+     /*
+    @Transactional
+    public Product save(Product product, Account account) {
+
+        double amount = product.getPrice() * product.getQuantity();
+
+        if (amount <= account.getBalance()) {
+
+            account.reduceBalance(amount);
+
+            accountRepository.save(account);
+
+            return productRepository.save(product);
+
+        } else {
+            throw new DataBaseException("Insufficient balance error");
+        }
+    }*/
+
+
     public List<Product> findAll() {
         List<Product> productList = productRepository.findAll();
         return productList;

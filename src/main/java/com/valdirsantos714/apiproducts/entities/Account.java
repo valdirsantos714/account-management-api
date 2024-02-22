@@ -40,4 +40,10 @@ public class Account {
         this.bankName = accountDto.bankName();
     }
 
+    /*
+    public void reduceBalance(Double amount) {
+        double newBalance = balance -= amount;
+        setBalance(newBalance);
+    }*/
+
 }

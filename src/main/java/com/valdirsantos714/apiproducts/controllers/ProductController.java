@@ -42,6 +42,8 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Product> saveProduct(@RequestBody @Valid ProductDto productDto) {
+        /*Product product = new Product(productDto);
+        Account account = product.getAccount();*/
 
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(productDto));
     }
