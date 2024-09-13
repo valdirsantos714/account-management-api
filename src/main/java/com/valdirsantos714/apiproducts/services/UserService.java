@@ -1,7 +1,8 @@
 package com.valdirsantos714.apiproducts.services;
 
-import com.valdirsantos714.apiproducts.dto.UserDto;
-import com.valdirsantos714.apiproducts.entities.User;
+import com.valdirsantos714.apiproducts.payloads.ProductDto;
+import com.valdirsantos714.apiproducts.payloads.UserDto;
+import com.valdirsantos714.apiproducts.model.User;
 import com.valdirsantos714.apiproducts.repositories.UserRepository;
 import com.valdirsantos714.apiproducts.services.exceptions.DataBaseException;
 import com.valdirsantos714.apiproducts.services.exceptions.ResourceNotFound;
@@ -12,11 +13,15 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserService {
+
+    @Autowired
+    private ProductService productService;
 
     @Autowired
     private UserRepository userRepository;
@@ -34,6 +39,9 @@ public class UserService {
     @Transactional
     public User save (UserDto userDto) {
         var user = new User(userDto);
+        if (userDto.productList() == null) {
+            user.setProductList(new ArrayList<>());
+        }
         return userRepository.save(user);
     }
 
@@ -62,10 +70,41 @@ public class UserService {
     }
 
     private void updateData(User outdateUser, UserDto updatedUser) {
-        outdateUser.setName(updatedUser.name());
-        outdateUser.setAge(updatedUser.age());
-        outdateUser.setSex(updatedUser.sex());
         outdateUser.setEmail(updatedUser.email());
+        outdateUser.setPassword(updatedUser.password());
+    }
 
+    public User saveProductInListOfUser(Long idUser, ProductDto productDto) {
+        var user = findById(idUser);
+        var product = productService.save(productDto);
+
+        user.getProductList().add(product);
+        userRepository.save(user);
+
+        product.setUser(user);
+        productService.save(new ProductDto(product));
+
+        return user;
+    }
+
+    public User subtractQuantity(Long idUser, Long idProduct, Integer quantity) {
+        var user = findById(idUser);
+        var product = productService.findById(idProduct);
+
+        var oldQuantity = product.getQuantity();
+//        var newQuantity = oldQuantity - quantity;
+//        product.setQuantity(newQuantity);
+        var payload = new ProductDto(product.getProductCode(), product.getName(), oldQuantity - quantity, product.getPrice(), product.getCategory(), product.getUser());
+        productService.update(idProduct, payload);
+//        var oldQuantity = product.getQuantity();
+//        var newQuantity = oldQuantity - quantity;
+//        product.setQuantity(newQuantity);
+////        if (quantity >= 1 && oldQuantity >= 1 && oldQuantity >= quantity) {
+////            product.setQuantity(oldQuantity -= quantity);
+////        }
+//
+
+//        productService.save(new ProductDto(product));
+        return userRepository.save(user);
     }
 }

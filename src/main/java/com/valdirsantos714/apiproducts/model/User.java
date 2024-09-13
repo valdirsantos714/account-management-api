@@ -1,7 +1,7 @@
-package com.valdirsantos714.apiproducts.entities;
+package com.valdirsantos714.apiproducts.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.valdirsantos714.apiproducts.dto.UserDto;
+import com.valdirsantos714.apiproducts.payloads.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,25 +22,18 @@ public class User {
     private Long id;
 
     @Column(nullable = false, length = 100)
-    private String name;
-
-    @Column(nullable = false)
-    private Integer age;
-
-    @Column(nullable = false, length = 15)
-    private String sex;
-
-    @Column(nullable = false, length = 70)
     private String email;
 
+    @Column(nullable = false, length = 70)
+    private String password;
+
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private List<Account> accountList = new ArrayList<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Product> productList = new ArrayList<>();
 
     public User (UserDto userDto) {
-        this.name = userDto.name();
-        this.age = userDto.age();
-        this.sex = userDto.sex();
         this.email = userDto.email();
+        this.password = userDto.password();
+        this.productList = userDto.productList();
     }
 }

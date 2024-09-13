@@ -1,9 +1,9 @@
 package com.valdirsantos714.apiproducts.controllers;
 
-import com.valdirsantos714.apiproducts.dto.UserDto;
-import com.valdirsantos714.apiproducts.entities.Account;
-import com.valdirsantos714.apiproducts.entities.Product;
-import com.valdirsantos714.apiproducts.entities.User;
+import com.valdirsantos714.apiproducts.payloads.ProductDto;
+import com.valdirsantos714.apiproducts.payloads.UserDto;
+import com.valdirsantos714.apiproducts.model.User;
+import com.valdirsantos714.apiproducts.payloads.UserPayloadResponse;
 import com.valdirsantos714.apiproducts.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,35 +21,28 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> findAllUsers() {
+    public ResponseEntity findAllUsers() {
         List<User> list = userService.findAll();
 
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findByIdUser (@PathVariable Long id) {
+    public ResponseEntity findByIdUser (@PathVariable Long id) {
         User user = userService.findById(id);
 
         return ResponseEntity.ok().body(user);
 
     }
 
-    @GetMapping(value = "/{id}/accounts")
-    public ResponseEntity<List<Account>> findAccounts (@PathVariable Long id) {
-        User user = userService.findById(id);
-
-        return ResponseEntity.ok().body(user.getAccountList());
-
-    }
-
     @PostMapping
-    public ResponseEntity<User> saveUser(@RequestBody @Valid UserDto userDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userDto));
+    public ResponseEntity saveUser(@RequestBody @Valid UserDto userDto) {
+        var user = userService.save(userDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new UserPayloadResponse(user));
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody @Valid UserDto userDto) {
+    public ResponseEntity updateUser(@PathVariable Long id, @RequestBody @Valid UserDto userDto) {
         var user = new User(userDto);
         user = userService.update(id, userDto);
 
@@ -57,9 +50,28 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable  Long id) {
+    public ResponseEntity deleteUser(@PathVariable  Long id) {
         userService.delete(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/product/{idUser}/{idProduct}/{quantity}")
+    public ResponseEntity subtractQuantity(@PathVariable(name = "idUser") Long idUser,
+                                           @PathVariable(name = "idProduct") Long idProduct,
+                                           @PathVariable(name = "quantity") Integer quantity) {
+
+        userService.subtractQuantity(idUser, idProduct, quantity);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("new UserPayloadResponse(user)");
+    }
+
+    @PostMapping("/product/{idUser}")
+    public ResponseEntity saveProduct(@PathVariable(name = "idUser") Long idUser,
+                                      @RequestBody @Valid ProductDto productDto) {
+
+        var user = userService.saveProductInListOfUser(idUser, productDto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(new UserPayloadResponse(user));
     }
 }

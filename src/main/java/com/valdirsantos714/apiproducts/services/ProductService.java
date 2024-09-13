@@ -1,7 +1,7 @@
 package com.valdirsantos714.apiproducts.services;
 
-import com.valdirsantos714.apiproducts.dto.ProductDto;
-import com.valdirsantos714.apiproducts.entities.Product;
+import com.valdirsantos714.apiproducts.payloads.ProductDto;
+import com.valdirsantos714.apiproducts.model.Product;
 import com.valdirsantos714.apiproducts.repositories.ProductRepository;
 import com.valdirsantos714.apiproducts.services.exceptions.DataBaseException;
 import com.valdirsantos714.apiproducts.services.exceptions.ResourceNotFound;
